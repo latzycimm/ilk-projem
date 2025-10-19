@@ -1,2 +1,2 @@
-# ilk-projem
+# yengeye çıkma teklifi edersin
 cikma tekifi
