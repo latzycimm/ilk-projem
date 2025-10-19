@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💘 Süper Romantik Teklif 💘</title>
+    <link href="https://fonts.cdnjs.com/css?family=Comic+Sans+MS" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif; /* Comic Sans yerine sade bir font */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif; /* Güncellenmiş font */
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b6b, #ffc0cb, #87ceeb);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: backgroundAnim 10s infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes backgroundAnim {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 95%;
+            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stage {
+            position: relative;
+            min-height: 400px;
+        }
+
+        .question-container {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4d4d;
+            animation: bounce 1s infinite;
+        }
+
+        .game-instructions {
+            display: none;
+            font-size: 18px;
+            color: #666;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255, 77, 77, 0.1);
+            border-radius: 10px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px;
+            width: 80%;
+            max-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #yesBtn {
+            background: linear-gradient(45deg, #ff4d4d, #ff8080);
+            color: white;
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+
+        #yesBtn:hover {
+            transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+            box-shadow: -5px 5px 20px rgba(0,0,0,0.3);
+        }
+
+        #noBtn {
+            background: #666;
+            color: white;
+            position: relative;
+            z-index: 1000;
+            touch-action: none;
+        }
+
+        .game-container {
+            display: none;
+            position: relative;
+            height: 400px;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .heart-catcher {
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            cursor: move;
+            user-select: none;
+            z-index: 2;
+        }
+
+        .falling-heart {
+            position: absolute;
+            font-size: 30px;
+            animation: fall linear;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            from { transform: translateY(-50px); }
+            to { transform: translateY(450px); }
+        }
+
+        .score {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #ff4d4d;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 3;
+        }
+
+        .timer {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            color: #ff4d4d;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 3;
+        }
+
+        .final-message {
+            display: none;
+            animation: fadeInScale 1s;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,192,203,0.95));
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeInScale {
+            0% { 
+                opacity: 0; 
+                transform: scale(0.8); 
+            }
+            50% { 
+                transform: scale(1.1); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1); 
+            }
+        }
+
+        .final-message h2 {
+            font-size: 32px;
+            color: #ff4d4d;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .final-message p {
+            font-size: 22px;
+            color: #666;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+
+        .love-quote {
+            font-style: italic;
+            color: #ff6b6b;
+            font-size: 18px;
+            margin: 20px 0;
+            padding: 10px;
+            border-left: 4px solid #ff4d4d;
+            background: rgba(255,255,255,0.5);
+        }
+
+        .emoji-container {
+            margin: 20px 0;
+            animation: emojiContainer 4s infinite;
+        }
+
+        @keyframes emojiContainer {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .floating-emoji {
+            display: inline-block;
+            animation: floatingEmoji 2s infinite;
+            margin: 0 10px;
+        }
+
+        @keyframes floatingEmoji {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.2); }
+        }
+
+        .emoji-rain {
+            position: fixed;
+            top: -20px;
+            font-size: 24px;
+            pointer-events: none;
+            animation: emojiRain 3s linear infinite;
+        }
+
+        @keyframes emojiRain {
+            0% {
+                transform: translateY(-20px) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(50vh) rotate(180deg) scale(1.2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .success-emoji {
+            display: inline-block;
+            animation: successEmoji 2s infinite;
+            margin: 0 5px;
+            font-size: 40px;
+        }
+
+        @keyframes successEmoji {
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.3) rotate(-15deg); }
+            50% { transform: scale(1) rotate(0deg); }
+            75% { transform: scale(1.3) rotate(15deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        @media (max-width: 768px) {
+            .btn {
+                font-size: 18px;
+                padding: 12px 25px;
+            }
+            .question-container {
+                font-size: 22px;
+            }
+            .final-message h2 {
+                font-size: 26px;
+            }
+            .final-message p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="stage">
+            <div class="question-container">
+                <div style="font-size: 60px; margin-bottom: 20px;">💝</div>
+                <p>Benimle Çıkar Mısın?</p>
+            </div>
+
+            <div class="game-instructions">
+                <p>🎮 Kalpleri Yakala! 💝</p>
+                <p>10 kalp toplarsan özel mesajı göreceksin!</p>
+                <small>Parmağınla veya fareyle karakteri hareket ettir</small>
+            </div>
+
+            <div class="game-container">
+                <div class="score">Kalp: <span id="heartCount">0</span>/10</div>
+                <div class="timer">Süre: <span id="timeLeft">30</span>s</div>
+                <div class="heart-catcher">🤲</div>
+            </div>
+
+            <button id="yesBtn" class="btn">Evet 😍</button>
+            <button id="noBtn" class="btn">Siktir git aq 😢</button>
+
+            <div class="final-message">
+                <h2>🌟 Seviyorum len seni 🌟</h2>
+                
+                <div class="emoji-container">
+                    <span class="floating-emoji">🎉</span>
+                    <span class="floating-emoji">💑</span>
+                    <span class="floating-emoji">💝</span>
+                    <span class="floating-emoji">🌹</span>
+                </div>
+
+                <p>Zaten sende olan kalbimi kazandın.</p>
+                
+                <div class="love-quote">
+                    "Seninle Her Anım Bir Masala Dönüşsün..."
+                </div>
+                
+                <p>Artık Resmi Olarak Sevgiliyiz! 💑</p>
+                
+                <div class="emoji-container">
+                    <span class="success-emoji">💞</span>
+                    <span class="success-emoji">💘</span>
+                    <span class="success-emoji">💖</span>
+                    <span class="success-emoji">✨</span>
+                </div>
+                
+                <p style="font-size: 24px; color: #ff4d4d; margin-top: 20px;">
+                    YA BEN SENİ ÇOK SEVİYOM ALOOO
+                </p>
+            </div>
+        </div>
+    </div>
+
+<script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const gameContainer = document.querySelector('.game-container');
+    const gameInstructions = document.querySelector('.game-instructions');
+    const heartCatcher = document.querySelector('.heart-catcher');
+    const heartCountDisplay = document.getElementById('heartCount');
+    const timeLeftDisplay = document.getElementById('timeLeft');
+    const finalMessage = document.querySelector('.final-message');
+    const questionContainer = document.querySelector('.question-container');
+
+    let heartCount = 0;
+    let gameActive = false;
+    let timeLeft = 30;
+    let gameTimer;
+
+    function startGame() {
+        gameActive = true;
+        heartCount = 0;
+        timeLeft = 30;
+        heartCountDisplay.textContent = heartCount;
+        timeLeftDisplay.textContent = timeLeft;
+
+        questionContainer.style.display = 'none';
+        yesBtn.style.display = 'none';
+        noBtn.style.display = 'none';
+        gameInstructions.style.display = 'block';
+        gameContainer.style.display = 'block';
+        finalMessage.style.display = 'none';
+
+        // Zamanlayıcı başlat
+        gameTimer = setInterval(() => {
+            timeLeft--;
+            timeLeftDisplay.textContent = timeLeft;
+
+            if (timeLeft <= 0) {
+                endGame(false);
+            }
+        }, 1000);
+
+        createFallingHearts();
+    }
+
+    function createFallingHearts() {
+        if (!gameActive) return;
+
+        const heart = document.createElement('div');
+        heart.className = 'falling-heart';
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * (gameContainer.offsetWidth - 30) + 'px';
+        heart.style.animation = `fall ${Math.random() * 1 + 2}s linear`;
+        gameContainer.appendChild(heart);
+
+        heart.addEventListener('animationend', () => heart.remove());
+
+        if (gameActive) {
+            setTimeout(createFallingHearts, Math.random() * 500 + 500);
+        }
+    }
+
+    function createEmojiRain() {
+        const emojis = ['💖', '💝', '💕', '💓', '💗', '💞', '💘', '💌'];
+        const emoji = document.createElement('div');
+        emoji.className = 'emoji-rain';
+        emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.left = Math.random() * 100 + 'vw';
+        document.body.appendChild(emoji);
+
+        emoji.addEventListener('animationend', () => emoji.remove());
+    }
+
+    function endGame(success) {
+        gameActive = false;
+        clearInterval(gameTimer);
+        gameContainer.style.display = 'none';
+        gameInstructions.style.display = 'none';
+
+        if (success) {
+            finalMessage.style.display = 'block';
+            for (let i = 0; i < 50; i++) {
+                setTimeout(createEmojiRain, i * 200);
+            }
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100, 50, 200]);
+            }
+        } else {
+            startGame();
+        }
+    }
+
+    let touchStartX = 0;
+    heartCatcher.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    });
+
+    heartCatcher.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const containerRect = gameContainer.getBoundingClientRect();
+        const newX = touch.clientX - containerRect.left - (heartCatcher.offsetWidth / 2);
+
+        if (newX >= 0 && newX <= containerRect.width - heartCatcher.offsetWidth) {
+            heartCatcher.style.left = newX + 'px';
+        }
+    });
+
+    heartCatcher.addEventListener('mousedown', (e) => {
+        const move = (e) => {
+            const containerRect = gameContainer.getBoundingClientRect();
+            const newX = e.clientX - containerRect.left - (heartCatcher.offsetWidth / 2);
+
+            if (newX >= 0 && newX <= containerRect.width - heartCatcher.offsetWidth) {
+                heartCatcher.style.left = newX + 'px';
+            }
+        };
+
+        document.addEventListener('mousemove', move);
+        document.addEventListener('mouseup', () => {
+            document.removeEventListener('mousemove', move);
+        }, { once: true });
+    });
+
+    setInterval(() => {
+        if (!gameActive) return;
+
+        const hearts = document.querySelectorAll('.falling-heart');
+        const catcherRect = heartCatcher.getBoundingClientRect();
+
+        hearts.forEach(heart => {
+            const heartRect = heart.getBoundingClientRect();
+            if (heartRect.bottom >= catcherRect.top &&
+                heartRect.top <= catcherRect.bottom &&
+                heartRect.right >= catcherRect.left &&
+                heartRect.left <= catcherRect.right) {
+                heart.remove();
+                heartCount++;
+                heartCountDisplay.textContent = heartCount;
+
+                if (navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
+
+                if (heartCount >= 10) {
+                    endGame(true);
+                }
+            }
+        });
+    }, 100);
+
+    // Hayır butonu için yeni olay dinleyicileri
+    let noBtnClickCount = 0;
+    let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    function moveButton() {
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+        const maxX = window.innerWidth - noBtn.offsetWidth;
+        const maxY = window.innerHeight - noBtn.offsetHeight;
+
+        noBtn.style.position = 'fixed';
+        noBtn.style.left = Math.min(Math.max(0, x), maxX) + 'px';
+        noBtn.style.top = Math.min(Math.max(0, y), maxY) + 'px';
+
+        noBtnClickCount++;
+        const messages = [
+            "Emin misin? 🥺",
+            "Tekrar düşün bence 😊",
+            "Yanlış butona basıyosun 💝",
+            "Son kararın mı reis? 🌹",
+            "Bence bir daha dene şansını ✨",
+          "O elini butondan çek sikerim o elini oe >:c",
+          "İllede sen amk zorla değilmi banane?",
+          "Sen şimdi benimle çıkmıyonmu :]",
+          "Gece evine gelir yatağında öperim seni bak",
+          "Yanlış yoldasın reis bence birdaha düşün"
+        ];
+        noBtn.textContent = messages[noBtnClickCount % messages.length];
+
+        if (navigator.vibrate) {
+            navigator.vibrate(50);
+        }
+    }
+
+    noBtn.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        moveButton();
+    }, { passive: false });
+
+    noBtn.addEventListener('click', moveButton);
+
+    if (!isMobile) {
+        noBtn.addEventListener('mouseover', moveButton);
+    }
+
+    window.addEventListener('scroll', function() {
+        if (noBtn.style.position === 'fixed') {
+            const rect = noBtn.getBoundingClientRect();
+            if (rect.left < 0 || rect.top < 0 ||
+                rect.right > window.innerWidth ||
+                rect.bottom > window.innerHeight) {
+                moveButton();
+            }
+        }
+    });
+
+    window.addEventListener('resize', function() {
+        if (noBtn.style.position === 'fixed') {
+            moveButton();
+        }
+    });
+
+    yesBtn.addEventListener('click', startGame);
+</script>
+
+</body>
+</html>
